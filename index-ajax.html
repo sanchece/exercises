@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Giphy Party!</title>
+  <link rel="stylesheet"
+  href="https://bootswatch.com/4/darkly/bootstrap.min.css">
+</head>
+
+<body>
+  <script
+  src="https://code.jquery.com/jquery-3.5.1.js"
+  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
+  <form id="searchGIF">
+    <input id="userInput">
+    <button id="submit">Search GIF</button>
+  </form>
+
+  <div id="area"></div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script>console.log("Let's get this party started!");
+  const $gifArea=$("#area");
+  
+  async function getGiphy(gif){
+      const res= await axios.get(`http://api.giphy.com/v1/gifs/search`,{
+          params:{
+              q:gif,
+              api_key:"NtEzWT15AE9P6SkxqCjunZ2RNz5vCSdE"
+          }});
+      return res;
+  }
+  
+  //getGiphy("happy");
+  
+  $("#submit").on("click",async function(e){
+      e.preventDefault();
+      let userInput=$("#userInput").val();
+      let gif= await getGiphy(userInput);
+      let $newGif = $("<img>", {
+          src:gif.data.data[0].images.original.url,
+          class: "w-10"
+        });
+        $gifArea.append($newGif);  
+      
+  })</script>
+</body>
+
+</html>
