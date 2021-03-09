@@ -27,5 +27,11 @@ def is_odd_string(word):
         >>> is_odd_string('amazing')
         True
     """
+    ref=ord('a')-1
+    total=0
+    for char in word:
+        total+=(ord(char)-ref)
+    return total%2==1
+        
 
     # Hint: you may find the ord() function useful here

@@ -9,5 +9,6 @@ def remove_every_other(lst):
     This should return a list, not mutate the original:
 
         >>> lst
-        [1, 2, 3, 4, 5]
+        [1, 2, 3, 4, 5]lst
     """
+    return [lst[i]for i in range(0,len(lst),2)]
