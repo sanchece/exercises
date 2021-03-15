@@ -12,6 +12,6 @@
     {% for msg in get_flashed_messages() %}
     <h2>{{ msg }}</h2>
 {% endfor %}
-    <footer>carlos sanchez</footer>
+    <footer>your answers: {{session["RESPONSES"]}}</footer>
 </body>
 </html>

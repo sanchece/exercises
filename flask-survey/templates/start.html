@@ -5,10 +5,10 @@
 {%endblock%}
 
 {%block content%}
-    <form action="/questions/0">
-    <h3>Title of Survey</h3>
+    <form action="/sesh" method="POST">
+    <h3>{{survey.title}}</h3>
     <p>
-        Instructions: Ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, facilis impedit cumque necessitatibus beatae vitae fugit corrupti voluptates laborum, id itaque laboriosam reprehenderit eos sed? Ut nihil nisi animi quae.
+        Instructions: {{survey.instructions}}
     </p>
     <button> Start </button>
 </form>
