@@ -5,7 +5,7 @@
 {%endblock%}
 
 {%block content%}
-    <form action="/answer">
+    <form action="/answer" method="POST">
         {{question.question}}  
             <ul>                
             {%for choice in question.choices%}

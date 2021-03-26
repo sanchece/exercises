@@ -1,0 +1,98 @@
+------------------------------------------------
+--1 Medical Center--
+
+CREATE TABLE patients(
+
+id SERIAL PRIMARY KEY,
+name TEXT,
+);
+
+CREATE TABLE doctors(
+id SERIAL PRIMARY KEY,
+doctor_name TEXT
+);
+
+CREATE TABLE medical_center(
+id SERIAL PRIMARY KEY,
+doctorid TEXT REFERENCES patients(id),
+patientid TEXT REFERENCES doctors(id),
+date DATE,
+diagnosis TEXT,
+);
+
+--------------------------------------------------
+--2 Craigslist--
+
+CREATE TABLE post(
+id SERIAL PRIMARY KEY,
+title VARCHAR(30),
+text TEXT, 
+user TEXT REFERENCES users(username),
+location TEXT REFERENCES users(location),
+region TEXT REFERNCES users(region),
+date DATE
+);
+
+CREATE TABLE users(
+id SERIAL PRIMARY KEY,
+username VARCHAR(10) NOT NULL,
+location TEXT,
+region TEXT NOT NULL
+);
+
+CREATE TABLE category(
+id SERIAL PRIMARY KEY,
+category TEXT
+
+--------------------------------------------------
+--3 Soccer League--
+CREATE TABLE season(
+id SERIAL PRIMARY KEY,
+team TEXT REFERENCES teams(name),
+start DATE,
+end DATE,
+);
+
+
+CREATE TABLE teams(
+id SERIAL PRIMARY KEY,
+name VARCHAR(20),
+city TEXT
+);
+
+CREATE TABLE players(
+id SERIAL PRIMARY KEY,
+name VARCHAR(20),
+goals INTEGER,
+team TEXT REFERENCES teams(name)
+);
+
+CREATE TABLE referees(
+id SERIAL PRIMARY KEY,
+name TEXT
+)
+
+CREATE TABLE matches(
+id SERIAL PRIMARY KEY,
+date DATE,
+team1 TEXT REFERENCES teams(name),
+team2 TEXT REFERENCES teams(name),
+referee TEXT REFERENCES referees(name),
+
+);
+
+CREATE TABLE goals(
+id SERIAL PRIMARY KEY,
+goal INTEGER,
+player TEXT REFERENCES players(name),
+team TEXT REFERENCES teams(name)
+);
+
+CREATE TABLE results(
+id SERIAL PRIMARY KEY,
+match INT REFERENCES matches(id),
+goal INT REFERENCES goals(id)
+)
+
+
+
