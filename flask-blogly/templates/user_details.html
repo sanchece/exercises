@@ -9,7 +9,7 @@
 <div class="container pt-4">
     <div class="row ">
         <div class="col ">
-            <img class="rounded-lg" style="width:400px;" src="{{user.image_url}}" alt="Italian Trulli">
+            <img class="rounded-lg" style="width:400px;" src="{{user.image_url}}" alt="{{user.first_name}}">
         </div>
         <div class="col ">
             <div class="row "><h3>{{user.first_name}} {{user.last_name}}</h3></div>
@@ -20,6 +20,13 @@
                 <form action="/users/{{user.id}}/delete" method="POST">
                     <button class="btn btn-danger">Delete</button>
                 </form>               
+            </div>
+            <div class="row">
+                <h2>Posts</h2>
+                <ul>
+                    {% for post in posts%}
+                    {%endfor%}
+                </ul>
             </div>
         </div>
     </div>
