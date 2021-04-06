@@ -17,6 +17,12 @@ Add post for {{user.first_name}}
                 <label for="content">Content</label>
                 <input type="content" class="form-control" name="content" placeholder="Write your post here">
             </div>
+            {%if tags%} 
+            {%for tag in tags%}
+            <input type="checkbox" name="tags" value="{{ tag.id }}">
+            <label for="tags"> {{tag.name}}</label><br>
+            {%endfor%}
+            {%endif%}
             <div class="row justify-content-center ">
                 <button type="submit" class="btn btn-primary">Add Post</button>
             </div>

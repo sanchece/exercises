@@ -12,12 +12,12 @@
                 <a href="posts/{{post.id}}">
                     {{post.title}} 
                 </a>
-                {{post.content}} 
+                {{post.content}} s
             </li>
         {% endfor%}
     </ul>
-    <form action="/users/new" method="GET">
-        <button type="submit" class="btn btn-primary">Add User</button>
+    <form action="/users" method="GET">
+        <button type="submit" class="btn btn-primary">Users</button>
     </form>
     
 {%endblock%}
