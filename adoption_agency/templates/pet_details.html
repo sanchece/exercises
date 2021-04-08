@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{%block title%}
+{{pet.name}}
+{%endblock%}
+
+{%block content%}
+<div class="row justify-content-center ">
+    <div class="col-4 p-4 my-auto border rounded">
+<b>Species:</b>{{pet.species}}<br>
+<b>Age:</b>{{pet.age}}
+<img class="rounded-lg"  style="height:200px" src="{{pet.photo_url}}">
+</div>
+</div>
+
+<div class="row justify-content-center ">
+    <div class="col-4 p-4 border rounded">
+  <form action="/{{pet.id}}" method="POST">
+      {{form.hidden_tag()}}
+      {%for field in form
+         if field.widget.input_type !='hidden'%}
+         <div class="form-group">
+             {{field.label}}
+             {{field(class_="form-control")}}
+
+         </div>
+             {%for error in field.errors%}
+             <small class="form-text text-danger">
+             {{error}}
+             </small>
+             {%endfor%}
+                     
+         {%endfor%}
+         <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
+
+{%endblock%}

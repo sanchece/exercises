@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{%block title%}
+Pet Adoption Agency
+{%endblock%}
+
+{%block content%}
+    <div class="container w-50 pt-4">
+        {%for pet in pets%}
+        <div class="row ">
+            <div  class="my-auto col ">
+                <a href="/{{pet.id}}"><h2>{{pet.name}}</h2> </a>                
+             </div>
+            <div class="col pt-2" >
+                <img class="rounded-lg  " style="height:200px" src="{{pet.photo_url}}" alt="{{pet.name}}">
+            </div>
+            <div class="col my-auto">
+                {%if pet.available%}
+                Ready to be adopted
+                {%else%}
+                Not ready to be adopted
+                 {%endif%}
+
+            </div>
+
+        </div>
+  
+        {%endfor%}
+    
+  </div>
+    
+{%endblock%}
+    
