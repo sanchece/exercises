@@ -1,0 +1,35 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+
+<div class="row justify-content-center ">
+    <div class="col-4 p-4 ">
+        <h3>{{user.username}}</h3>
+        <ul class="list-group">
+            <li class="list-group-item"><b>Username:</b>{{user.username}}</li>
+            <li class="list-group-item"><b>Email:</b>{{user.email}}</li>
+            <li class="list-group-item"><b>First Name:</b>{{user.first_name}}</li>
+            <li class="list-group-item"><b>Last Name:</b>{{user.last_name}}</li>
+            {%for feedback in user.feedback%}
+            <li class="list-group-item"><b>Title:</b>{{feedback.title}}
+              {%if session['user_id']==user.id%}
+                <form method="POST" action="/feedback/{{feedback.id}}/delete">
+                  <a class="btn btn-info" href="/feedback/{{feedback.id}}/update">Update</a>
+                  <button class="btn btn-danger" type="submit">Delete</button>     
+                </form>
+                {%endif%}
+            </li>
+            
+            {%endfor%}
+          </ul>
+          {%if session['user_id']==user.id%}
+          <form method="POST" action="/users/{{user.username}}/delete">
+            <button class="btn btn-danger" type="submit">Delete Account</button>              
+          </form>
+          <form method="GET" action="/users/{{user.username}}/feedback/add">
+            <button class="btn btn-primary" type="submit">Add Feedback</button>              
+          </form>
+          {%endif%}
+    </div>
+</div>
+{% endblock %}
