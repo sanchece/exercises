@@ -1,6 +1,6 @@
 """Flask app for Cupcakes"""
 
-from flask import Flask, request, jsonify, redirect
+from flask import Flask, request, jsonify
 from models import db, connect_db,Cupcake
 
 app = Flask(__name__)
@@ -47,7 +47,6 @@ def update_cupcake(cupcake_id):
     cupcake.rating=request.json.get('rating',cupcake.rating)
     cupcake.image=request.json.get('image',cupcake.image)
     db.session.commit()
-
     res=jsonify(cupcake=cupcake.serialize())
 
     return res

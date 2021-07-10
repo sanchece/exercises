@@ -21,3 +21,5 @@ class Login_Form(FlaskForm):
 class Add_Feedback(FlaskForm):
     title=StringField("Title",validators=[InputRequired(),Length(max=100)])
     content=StringField("Content",validators=[InputRequired()])
+
+    
