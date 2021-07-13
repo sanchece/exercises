@@ -1,0 +1,14 @@
+{
+  "name": "markov",
+  "version": "1.0.0",
+  "description": "testing markov",
+  "main": "makeText.js",
+  "scripts": {
+    "test": "\u001b[A\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[arkov.js\u001b[3~\u001b[3~\u001b[\u001b[C\u001b["
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
