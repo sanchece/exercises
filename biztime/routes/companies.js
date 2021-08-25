@@ -4,24 +4,43 @@ const db = require("../db");
 let router = new express.Router();
 
 router.get("/", async function (req, res, next) {
-  const results = await db.query(`SELECT code,name FROM companies`);
-  console.log(results.rows);
-  return res.send({ companies: results.rows });
+  const results = await db.query(`SELECT code,name FROM companies ORDER BY NAME`);
+  // console.log(results.rows);
+  return res.json({ "companies": results.rows });
 });
 
 router.get("/:code", async function (req, res, next) {
+  try {
   let code = req.params.code;
-  const results = await db.query(`SELECT * FROM companies WHERE code = $1`, [
+  const company = await db.query(`SELECT * FROM companies WHERE code = $1`, [
     code,
   ]);
-  if (results.rows.length == 0) {
+  if (company.rows.length == 0) {
     throw new ExpressError(`Company does not exist in database: ${code}`, 404);
-  } else {
-    return res.send(results.rows);
+  } 
+  const companyInvoices= await db.query(
+    `SELECT id
+    FROM invoices WHERE comp_code=$1`,[code]
+  );
+  
+
+
+
+  let companyAndInvoices=company.rows[0];
+  let invoices= companyInvoices.rows;
+  companyAndInvoices.invoices=invoices.map(invoice => invoice.id);
+
+   return res.json({"company": companyAndInvoices});
+  }
+
+
+  catch (err) {
+    return next(err);
   }
 });
 
 router.post("/", async function (req, res, next) {
+  try {
   let name = req.body.name;
   let description = req.body.description;
   let code = name.toLowerCase();
@@ -33,10 +52,14 @@ router.post("/", async function (req, res, next) {
       [code, name, description]
     );
     // return res.send(results);
-    return res.send(results.rows);
+    return res.status(201).json({"company":results.rows[0]});
   } catch (err) {
     next(err);
   }
+}
+catch (err) {
+  return next(err);
+}
 });
 
 router.put("/:code", async function (req, res, next) {
@@ -56,7 +79,7 @@ router.put("/:code", async function (req, res, next) {
         404
       );
     } else {
-      return res.send(results.rows);
+      return res.json({"company":results.rows[0]});
     }
   } catch (err) {
     next(err);
@@ -66,14 +89,20 @@ router.put("/:code", async function (req, res, next) {
 router.delete("/:code", async function (req, res, next) {
   try {
     let code = req.params.code;
-    results = await db.query(`DELETE FROM companies WHERE code=$1`, [code]);
-
-    return res.send({
-      status: "deleted",
+    results = await db.query(`DELETE FROM companies WHERE code=$1 RETURNING code`, [code]);
+    if (results.rows.length == 0) {
+      throw new ExpressError(
+        `Company does not exist in database: ${code}`,
+        404
+      );
+    }
+    return res.json({
+      "status": "deleted",
     });
   } catch (err) {
     next(err);
   }
 });
+
 
 module.exports = router;
