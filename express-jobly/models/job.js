@@ -26,43 +26,8 @@ class Job{
   }
 
 
-//   static async findAll({ minSalary, hasEquity, title } = {}) {
-//     let queryString = `SELECT j.id,
-//                         j.title,
-//                         j.salary,
-//                         j.equity,
-//                         j.company_handle AS "companyHandle",
-//                         c.name AS "companyName"
-//                  FROM jobs j 
-//                    LEFT JOIN companies AS c ON c.handle = j.company_handle`;
-//     let filterSQL = [];
-
-
-//     if (minSalary !== undefined) {
-
-//       filterSQL.push(`salary >= ${minSalary}`);
-//     }
-
-//     if (hasEquity === true) {
-//         filterSQL.push(`equity > 0`);
-//     }
-
-//     if (title !== undefined) {
-
-//         filterSQL.push(`title ILIKE '%${title}%'`);
-//     }
-
-//     if (filterSQL.length > 0) {
-//         queryString += " WHERE " + filterSQL.join(" AND ");
-//     }
-//     queryString += " ORDER BY title";
-//     const jobsRes = await db.query(query, queryValues);
-//     return jobsRes.rows;
-//   }
-
-
-static async findAll({ minSalary, hasEquity, title } = {}) {
-    let query = `SELECT j.id,
+  static async findAll({ minSalary, hasEquity, title } = {}) {
+    let queryString = `SELECT j.id,
                         j.title,
                         j.salary,
                         j.equity,
@@ -70,36 +35,33 @@ static async findAll({ minSalary, hasEquity, title } = {}) {
                         c.name AS "companyName"
                  FROM jobs j 
                    LEFT JOIN companies AS c ON c.handle = j.company_handle`;
-    let whereExpressions = [];
-    let queryValues = [];
+    let filterSQL = [];
 
-    // For each possible search term, add to whereExpressions and
-    // queryValues so we can generate the right SQL
 
     if (minSalary !== undefined) {
-      queryValues.push(minSalary);
-      whereExpressions.push(`salary >= $${queryValues.length}`);
+
+      filterSQL.push(`salary >= ${minSalary}`);
     }
 
     if (hasEquity === true) {
-      whereExpressions.push(`equity > 0`);
+        filterSQL.push(`equity > 0`);
     }
 
     if (title !== undefined) {
-      queryValues.push(`%${title}%`);
-      whereExpressions.push(`title ILIKE $${queryValues.length}`);
+
+        filterSQL.push(`title ILIKE '%${title}%'`);
     }
 
-    if (whereExpressions.length > 0) {
-      query += " WHERE " + whereExpressions.join(" AND ");
+    if (filterSQL.length > 0) {
+        queryString += " WHERE " + filterSQL.join(" AND ");
     }
-
-    // Finalize query and return results
-
-    query += " ORDER BY title";
+    queryString += " ORDER BY title";
     const jobsRes = await db.query(query, queryValues);
     return jobsRes.rows;
   }
+
+
+
 
 }
 
