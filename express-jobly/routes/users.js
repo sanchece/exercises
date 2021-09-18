@@ -53,6 +53,8 @@ router.post("/", ensureLoggedInIsAdmin, async function (req, res, next) {
 
 router.get("/", ensureLoggedInIsAdmin, async function (req, res, next) {
   try {
+    console.log(res);
+    console.log(req);
     const users = await User.findAll();
     return res.json({ users });
   } catch (err) {
