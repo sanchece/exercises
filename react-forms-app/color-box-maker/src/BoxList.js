@@ -24,8 +24,8 @@ const BoxList = () => {
           backgroundColor={box.backgroundColor}
         />
       ))}
-      <NewBoxForm addBox={addBox}/>
+      <NewBoxForm addBox={addBox} />
     </div>
   );
 };
-export default BoxList
+export default BoxList;

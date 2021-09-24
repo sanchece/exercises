@@ -11,9 +11,8 @@ const NewTodoForm = ({addTodo}) => {
     }
     const handleSubmit=(e)=>{
         e.preventDefault();
-        addTodo({...TodoData,id:uuid()})
+        addTodo({...TodoData,id:uuid()});
         setTodoData({        id:"",        todo:""})
-
 
     }
     
