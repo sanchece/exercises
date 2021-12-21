@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import React, { useState, useEffect } from "react";
 import JoblyApi from "../api";
 import CompanyJobList from "../jobs/CompanyJobList";
+import 'react-calendar/dist/Calendar.css';
 
 const CompanyDetail = () => {
   const { company } = useParams();

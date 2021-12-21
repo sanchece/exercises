@@ -18,6 +18,7 @@ connect_db(app)
 
 @app.route('/')
 def list_stories():
+    
     posts=Post.query.all()
     return render_template("posts.html",posts=posts)
 

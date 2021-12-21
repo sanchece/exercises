@@ -1,13 +1,11 @@
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes/Routes";
 import Navbar from "./routes/Navbar";
-import useLocalStorage from "./customHooks.js/useLocalStorageHook";
-import JoblyApi from "./api";
+``````//#endregion                          ````````import JoblyApi from "./api";
 import UserData from "./UserDataContext";
 import React, { useEffect, useState } from "react";
 
 import jwt from "jsonwebtoken";
-
 
 function App() {
   const [token, setToken] = useLocalStorage("token");
@@ -24,9 +22,9 @@ function App() {
           setUser(user);
           setJobApps(new Set(user.applications));
           console.log("user fetched--->", user);
-        } else console.log("no token");
+        } 
+        else console.log("no token");
       }
-
       getUser();
     },
     [token]

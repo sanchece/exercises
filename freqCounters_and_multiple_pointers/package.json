@@ -1,0 +1,14 @@
+{
+  "name": "freqcounters_and_multiple_pointers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "average-pair.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jest": "^27.4.5"
+  }
+}

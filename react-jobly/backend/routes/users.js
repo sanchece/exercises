@@ -1,7 +1,5 @@
 "use strict";
-
 /** Routes for users. */
-
 const jsonschema = require("jsonschema");
 
 const express = require("express");
@@ -13,7 +11,6 @@ const userNewSchema = require("../schemas/userNew.json");
 const userUpdateSchema = require("../schemas/userUpdate.json");
 
 const router = express.Router();
-
 
 /** POST / { user }  => { user, token }
  *
